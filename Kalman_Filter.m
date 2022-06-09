@@ -36,9 +36,9 @@ for i = 2:len
     % X(t+1|t) update variable
     x_pred(i) = A * x_pred(i - 1);
     % P(t+1|t) predicted covariance matrix
-    P = A * P * A + Q;
+    P = A * P * A' + Q;
     % K(t+1) Kalman gain
-    K = P * B / (B * P * B + R);
+    K = P * B * (B * P * B' + R)';
     % X(t+1|t+1) estimated variable
     x_pred(i) = K * y(i) + (1 - K * B) * x_pred(i);
     % P(t+1|t+1) estimated covariance matrix
